@@ -27,10 +27,10 @@ class Calculator:
     def division(num1, num2):
         if isinstance(num1, int) and isinstance(num2, int):
             result = num1 / num2
-            if num1 % num2 != 0:
+            if num1 % num2 != 0:  # Когда деление с остатком в консоль выводиться число с плавоющей точкой
                 return result
-            else:
-                return int(result)
+            else: 
+                return int(result)  # Когда деление без остатка в консоль выводиться целое число
         else:
             raise Exception('The argument must be a integer')
     
