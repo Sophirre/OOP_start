@@ -1,4 +1,8 @@
 import math
+import eel
+
+eel.init("UI")
+eel.start('index.html', size=(380, 600))
 
 
 class Calculator:
@@ -56,17 +60,17 @@ class Calculator:
             raise Exception('The argument must be a integer')
         return result
 
-    @staticmethod
-    def operation_chooser(operation, first_num, *numbers):
+    @eel.expose
+    def operation_chooser(self, operation, first_num, *numbers):
         if operation == '+':
-            return Calculator.addition(first_num, numbers)
+            return self.addition(first_num, numbers)
         elif operation == '-':
-            return Calculator.subtraction(first_num, numbers)
+            return self.subtraction(first_num, numbers)
         elif operation == '*':
-            return Calculator.multiply(first_num, numbers)
+            return self.multiply(first_num, numbers)
         elif operation == '/':
             try:
-                return Calculator.division(first_num, numbers)
+                return self.division(first_num, numbers)
             except ZeroDivisionError as e:
                 raise e
         else:
@@ -83,33 +87,34 @@ class ScientificCalculator(Calculator):
         elif operation == 'tan' or operation == 'tg':
             return math.tan(first_num)
 
-'''
+
 class AccountingCalculator(Calculator):
     results = []
 
+    @classmethod
+    def memory_add(cls, result):
+        return cls.results.append(result)
+
+    @classmethod
+    def memory_get(cls):
+        return cls.results
+
     def addition(self, first_num, numbers):
-        self.results = ['300']
-        self.results.append(300)
-        print(self.results)
-    print(results) '''
+        result = super().addition(first_num, numbers)
+        AccountingCalculator.memory_add(result)
+        return result
 
-if __name__ == '__main__':
-    common = Calculator('common')
-    science = ScientificCalculator('common')
-    # accounting = AccountingCalculator('common')
-    print('----CommonCalculator----')
-    print(f"Multiply:  {common.operation_chooser('*', 20, 10)}")  # 200
-    print(f"Subtraction: {common.operation_chooser('-', 340, 20, 40, 80)}")  # 200
-    print(f"Addiction: {common.operation_chooser('+', 100, 25, 25, 50)}")  # 200
-    print(f"Division: {common.operation_chooser('/', 400, 2)}")  # 200
-    print('----ScientificCalculator----')
-    print(f"Sin: {science.operation_chooser('sin', 360)}")
-    print(f"Cos: {science.operation_chooser('cos', 520)}")
-    print(f"Tan: {science.operation_chooser('tg', 60)}")
-    # print('----AccountingCalculator----')
-    # print(accounting.operation_chooser('+', 100, 25, 25, 50))
-    # print(accounting.results)
+    def subtraction(self, first_num, numbers):
+        result = super().subtraction(first_num, numbers)
+        AccountingCalculator.memory_add(result)
+        return result
 
+    def division(self, first_num, numbers):
+        result = super().division(first_num, numbers)
+        AccountingCalculator.memory_add(result)
+        return result
 
-
-
+    def multiply(self, first_num, numbers):
+        result = super().multiply(first_num, numbers)
+        AccountingCalculator.memory_add(result)
+        return result
