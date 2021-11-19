@@ -2,7 +2,7 @@ import math
 import eel
 
 eel.init("UI")
-eel.start('index.html', size=(380, 600))
+
 
 
 class Calculator:
@@ -118,3 +118,10 @@ class AccountingCalculator(Calculator):
         result = super().multiply(first_num, numbers)
         AccountingCalculator.memory_add(result)
         return result
+
+
+@eel.expose
+def show(v):
+    return v
+
+eel.start('index.html', size=(380, 600))
