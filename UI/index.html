@@ -20,36 +20,36 @@
             </div>
 
             <div class="label">
-                <p>0</p>
+                <p id="displayNum">0</p>
             </div>
             <div class="buttonsPad">
                 <div class="row row-1">
                     <button class="button symbol">%</button>
                     <button class="button symbol">CE</button>
-                    <button class="button symbol">C</button>
+                    <button class="button symbol" onclick="clear()">C</button>
                     <button class="last_cl button symbol">÷</button>
                 </div>
                 <div class="row row-2">
-                    <button class="button num">7</button>
-                    <button class="button num">8</button>
-                    <button class="button num">9</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="7">7</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="8">8</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="9">9</button>
                     <button class="last_cl button symbol" >x</button>
                 </div>
                 <div class="row row-3">
-                    <button class="button num">4</button>
-                    <button class="button num">5</button>
-                    <button class="button num">6</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="4">4</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="5">5</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="6">6</button>
                     <button class="last_cl button symbol">-</button>
                 </div>
                 <div class="row row-4">
-                    <button class="button num">1</button>
-                    <button class="button num">2</button>
-                    <button class="button num">3</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="1">1</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="2">2</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="3">3</button>
                     <button class="last_cl button symbol">+</button>
                 </div>
                 <div class="row row-5">
                     <button class="button">+/-</button>
-                    <button class="button num">0</button>
+                    <button class="button num" onclick="showNumber(this.value)" value="0">0</button>
                     <button class="button">.</button>
                     <button class="last_cl button symbol" id="equal">=</button>
                 </div>
