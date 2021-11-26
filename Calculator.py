@@ -4,7 +4,6 @@ import eel
 eel.init("UI")
 
 
-
 class Calculator:
     def __init__(self, mode):
         self.calc_mode = mode  # common, accounting, scientific
