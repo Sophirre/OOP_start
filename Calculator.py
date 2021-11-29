@@ -1,4 +1,4 @@
-import math
+from math import sin, cos, tan
 import eel
 
 eel.init("UI")
@@ -9,67 +9,55 @@ class Calculator:
         self.calc_mode = mode  # common, accounting, scientific
 
     @staticmethod
-    def addition(first_num, numbers):
-        if isinstance(first_num, int):
-            result = first_num
-            for num in numbers:
-                if isinstance(num, int):
-                    result = result + num
-                else:
-                    raise Exception('The argument must be an integer')
-        else:
-            raise Exception('The argument must be an integer')
-        return result
+    def string_catcher(numbers: tuple) -> tuple:
+        return tuple([num for num in numbers if isinstance(num, int) or isinstance(num, float)])
 
     @staticmethod
-    def subtraction(first_num, numbers):
-        if isinstance(first_num, int):
-            result = first_num
-            for num in numbers:
-                if isinstance(num, int):
-                    result = result - num
-                else:
-                    raise Exception('The argument must be an integer')
-        else:
-            raise Exception('The argument must be an integer')
-        return result
+    def float_converter(*numbers):
+        return tuple([num if isinstance(num, float) else float(num) for num in numbers])
 
     @staticmethod
-    def multiply(first_num, numbers):
-        if isinstance(first_num, int):
-            result = first_num
-            for num in numbers:
-                if isinstance(num, int):
-                    result = result * num
-                else:
-                    raise Exception('The argument must be an integer')
-            return result
-        else:
-            raise Exception('The argument must be an integer')
+    def int_converter(number: float):
+        return int(number) if number % 1 == 0 else number
 
-    @staticmethod
-    def division(first_num, numbers):
-        if isinstance(first_num, int):
-            result = first_num
-            for num in numbers:
-                result = result / num
-                if result % num == 0:  # Когда деление с остатком в консоль выводиться число с плавоющей точкой
-                    result = int(result)
-        else:
-            raise Exception('The argument must be a integer')
-        return result
+    def addition(self, numbers: tuple) -> float:
+        numbers = self.string_catcher(numbers)
+        result = numbers[0]
+        for num in numbers[1:]:
+            result = result + num
+        return self.int_converter(result)
+
+    def subtraction(self, numbers: tuple) -> float:
+        numbers = self.string_catcher(numbers)
+        result = numbers[0]
+        for num in numbers[1:]:
+            result = result - num
+        return self.int_converter(result)
+
+    def multiply(self, numbers: tuple) -> float:
+        numbers = self.string_catcher(numbers)
+        result = numbers[0]
+        for num in numbers[1:]:
+            result = result * num
+        return self.int_converter(result)
+
+    def division(self, numbers):
+        result = numbers[0]
+        for num in numbers[1:]:
+            result = result / num
+        return self.int_converter(result)
 
     @eel.expose
-    def operation_chooser(self, operation, first_num, *numbers):
+    def operation_chooser(self, operation, *numbers):
         if operation == '+':
-            return self.addition(first_num, numbers)
+            return self.addition(numbers)
         elif operation == '-':
-            return self.subtraction(first_num, numbers)
+            return self.subtraction(numbers)
         elif operation == '*':
-            return self.multiply(first_num, numbers)
+            return self.multiply(numbers)
         elif operation == '/':
             try:
-                return self.division(first_num, numbers)
+                return self.division(numbers)
             except ZeroDivisionError as e:
                 raise e
         else:
@@ -77,14 +65,14 @@ class Calculator:
 
 
 class ScientificCalculator(Calculator):
-    def operation_chooser(self, operation, first_num):
-        super().operation_chooser(operation, first_num)
+    def operation_chooser(self, operation, *numbers):
+        super().operation_chooser(operation, numbers)
         if operation == 'sin':
-            return math.sin(first_num)
+            return sin(numbers[0])
         elif operation == 'cos':
-            return math.cos(first_num)
+            return cos(numbers[0])
         elif operation == 'tan' or operation == 'tg':
-            return math.tan(first_num)
+            return tan(numbers[0])
 
 
 class AccountingCalculator(Calculator):
@@ -98,23 +86,23 @@ class AccountingCalculator(Calculator):
     def memory_get(cls):
         return cls.results
 
-    def addition(self, first_num, numbers):
-        result = super().addition(first_num, numbers)
+    def addition(self, numbers):
+        result = super().addition(numbers)
         AccountingCalculator.memory_add(result)
         return result
 
-    def subtraction(self, first_num, numbers):
-        result = super().subtraction(first_num, numbers)
+    def subtraction(self, numbers):
+        result = super().subtraction(numbers)
         AccountingCalculator.memory_add(result)
         return result
 
-    def division(self, first_num, numbers):
-        result = super().division(first_num, numbers)
+    def division(self, numbers):
+        result = super().division(numbers)
         AccountingCalculator.memory_add(result)
         return result
 
-    def multiply(self, first_num, numbers):
-        result = super().multiply(first_num, numbers)
+    def multiply(self, numbers):
+        result = super().multiply(numbers)
         AccountingCalculator.memory_add(result)
         return result
 
@@ -122,5 +110,6 @@ class AccountingCalculator(Calculator):
 @eel.expose
 def show(v):
     return v
+
 
 eel.start('index.html', size=(380, 600))
