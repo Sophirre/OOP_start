@@ -5,7 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400&display=swap" rel="stylesheet">
-
+     <link rel="shortcut icon" href="style/images/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <title>Calculator</title>
     <script src="eel.js"></script>
@@ -26,30 +26,30 @@
                 <div class="row row-1">
                     <button class="button symbol">%</button>
                     <button class="button symbol">CE</button>
-                    <button class="button symbol" onclick="clear()">C</button>
-                    <button class="last_cl button symbol">÷</button>
+                    <button class="button symbol" id="clear-btn">C</button>
+                    <button class="last_cl button symbol" onclick="insert(this.value)" value="/">÷</button>
                 </div>
                 <div class="row row-2">
-                    <button class="button num" onclick="showNumber(this.value)" value="7">7</button>
-                    <button class="button num" onclick="showNumber(this.value)" value="8">8</button>
-                    <button class="button num" onclick="showNumber(this.value)" value="9">9</button>
-                    <button class="last_cl button symbol" >x</button>
+                    <button class="button num" onclick="insert(this.value)" value="7">7</button>
+                    <button class="button num" onclick="insert(this.value)" value="8">8</button>
+                    <button class="button num" onclick="insert(this.value)" value="9">9</button>
+                    <button class="last_cl button symbol" onclick="insert(this.value)" value="*">x</button>
                 </div>
                 <div class="row row-3">
-                    <button class="button num" onclick="showNumber(this.value)" value="4">4</button>
-                    <button class="button num" onclick="showNumber(this.value)" value="5">5</button>
-                    <button class="button num" onclick="showNumber(this.value)" value="6">6</button>
-                    <button class="last_cl button symbol">-</button>
+                    <button class="button num" onclick="insert(this.value)" value="4">4</button>
+                    <button class="button num" onclick="insert(this.value)" value="5">5</button>
+                    <button class="button num" onclick="insert(this.value)" value="6">6</button>
+                    <button class="last_cl button symbol" onclick="insert(this.value)" value="-">-</button>
                 </div>
                 <div class="row row-4">
-                    <button class="button num" onclick="showNumber(this.value)" value="1">1</button>
-                    <button class="button num" onclick="showNumber(this.value)" value="2">2</button>
-                    <button class="button num" onclick="showNumber(this.value)" value="3">3</button>
-                    <button class="last_cl button symbol">+</button>
+                    <button class="button num" onclick="insert(this.value)" value="1">1</button>
+                    <button class="button num" onclick="insert(this.value)" value="2">2</button>
+                    <button class="button num" onclick="insert(this.value)" value="3">3</button>
+                    <button class="last_cl button symbol" onclick="insert(this.value)" value="+">+</button>
                 </div>
                 <div class="row row-5">
                     <button class="button">+/-</button>
-                    <button class="button num" onclick="showNumber(this.value)" value="0">0</button>
+                    <button class="button num" onclick="insert(this.value)" value="0">0</button>
                     <button class="button">.</button>
                     <button class="last_cl button symbol" id="equal">=</button>
                 </div>
