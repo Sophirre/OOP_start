@@ -13,6 +13,7 @@ function clear(){
     console.log('cleared');
 }
 
+
 async function operator_checker(){
     let number = displayNum.innerText;
     console.log(number);

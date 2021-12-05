@@ -8,7 +8,7 @@ class Calculator:
 
     @staticmethod
     def string_catcher(numbers: tuple) -> tuple:
-        return tuple([num if isinstance(num, int) or isinstance(num, float) else int(num) for num in numbers])
+        return tuple([num if isinstance(num, int) or isinstance(num, float) else float(num) for num in numbers])
 
     @staticmethod
     def float_converter(*numbers):
@@ -73,7 +73,7 @@ class Calculator:
         result = numbers[0]
         for num in numbers[1:]:
             result = result / num
-        return result
+        return round(result, 5)
 
     def operation_chooser(self, operation, numbers):
         if operation == '+':
